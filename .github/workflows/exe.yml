@@ -27,3 +27,19 @@ jobs:
           name: ExperimentalFMSynth
           path: |
             dist/*
+
+      - name: Set up Git for GitHub Actions
+        uses: actions/setup-git@v2
+
+      - name: Delete existing tag
+        run: |
+          git tag -d continuous || true
+          git push origin :refs/tags/continuous || true
+
+      - name: Create new release
+        id: create_release
+        run: |
+          gh release create continuous dist/ExperimentalFMSynth.exe --title "Continuous Release" --notes "Automated release from GitHub Actions"
+
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
