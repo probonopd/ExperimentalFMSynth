@@ -1,4 +1,4 @@
-name: Build and Deploy exe
+name: build
 
 on:
   push:
@@ -46,6 +46,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+            ( cd ExperimentalFMSynth ; zip -r ExperimentalFMSynth.app.zip ExperimentalFMSynth.app )
             wget -q https://github.com/TheAssassin/pyuploadtool/releases/download/continuous/pyuploadtool-x86_64.AppImage
             chmod +x pyuploadtool-x86_64.AppImage
-            ./pyuploadtool-x86_64.AppImage --appimage-extract-and-run **/ExperimentalFMSynth.exe
+            ./pyuploadtool-x86_64.AppImage --appimage-extract-and-run **/ExperimentalFMSynth.exe **/ExperimentalFMSynth.app.zip **/ExperimentalFMSynth
