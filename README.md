@@ -47,11 +47,22 @@ Run the main script to start the synthesizer application:
 python ExperimentalFMSynth.py
 ```
 
+## Contributing
+
+Feel free to fork the repository, create a branch, and submit a pull request with your changes.
+
+### TODO
+
+Pull requests that implement the following are especially welcome:
+
+- [ ] Bugfixes
+- [ ] More concepts from the video applied to code, e.g.,
+  - [ ] Slider for frequency of carrier 2 should adjust multiples of frequency of carrier 1 ("So you have one carrier that modulates the pitch frequency, and the other one is a multiple of the pitch frequency")
+  - [ ] If the frequency of carrier 1 changes, make the frequency of the modulator change accordingly, but not the other way around ("The modulator is always the pitch frequency")
+- [ ] Add a way to play MIDI files with this synth
+- [ ] Turn into a VST3
+
 ## Acknowledgments
 
 - [John Chowning, Computer Music, DX7 & FM Discovery](https://www.youtube.com/watch?v=Mu8lHX-xuSg) for insights into FM synthesis.
 - [Anthony Marinelli Music](https://www.youtube.com/watch?v=Mu8lHX-xuSg) for the educational video.
-
-## Contributing
-
-Feel free to fork the repository, create a branch, and submit a pull request with your changes.
