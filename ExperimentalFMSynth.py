@@ -41,9 +41,13 @@ class FMSynth(QWidget):
         self.setGeometry(100, 100, 400, 600)
         self.layout = QVBoxLayout()
 
-        self.carrier1_group, self.carrier1_sliders, self.carrier1_checkbox = self.create_operator_group("Carrier 1", 440, 100, 100, 70, 100, 100, 100)
-        self.carrier2_group, self.carrier2_sliders, self.carrier2_checkbox = self.create_operator_group("Carrier 2", 660, 100, 100, 70, 100, 100, 100)
-        self.modulator_group, self.modulator_sliders, self.modulator_checkbox = self.create_operator_group("Modulator", 5, 100, 100, 70, 100, 100, 100)
+        # Chowning in https://www.youtube.com/watch?v=Mu8lHX-xuSg:
+        # One carrier that modulates the pitch frequency, and the other one is a multiple of the pitch frequency.
+        # So if you want a resonance around the seventh harmonic, you make that carrier seven times the pitch with a separate envelope.
+        # The modulator is the same for both; the modulator is always the pitch frequency.
+        self.carrier1_group, self.carrier1_sliders, self.carrier1_checkbox = self.create_operator_group("Carrier 1", 440, 100, 100, 70, 100, 100)
+        self.carrier2_group, self.carrier2_sliders, self.carrier2_checkbox = self.create_operator_group("Carrier 2", 3080, 100, 100, 70, 100, 100)
+        self.modulator_group, self.modulator_sliders, self.modulator_checkbox = self.create_operator_group("Modulator", 440, 100, 100, 70, 100, 100)
 
         for group in [self.carrier1_group, self.carrier2_group, self.modulator_group]:
             self.layout.addWidget(group)
@@ -73,7 +77,7 @@ class FMSynth(QWidget):
         for i, label in enumerate(labels):
             slider = QSlider(Qt.Orientation.Horizontal)
             if i == 0:  # Frequency
-                slider.setRange(100, 2000)
+                slider.setRange(100, 5000)
             elif i < 3:  # Attack, Decay
                 slider.setRange(0, 2000)
             else:  # Sustain, Release, Amount
