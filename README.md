@@ -28,9 +28,13 @@ So, **multiple units containing two carriers and one modulator each**. This is h
 - **Volume Control**: Individual volume control for each synthesizer and an overall volume control.
 - **Written in Python**: Easily change how the synthesizer works.
 
+## Download
+
+* Windows: [ExperimentalFMSynth.exe](https://github.com/probonopd/ExperimentalFMSynth/releases/download/continuous/ExperimentalFMSynth.exe)
+
 ## Installation
 
-To run this project, you'll need Python 3 and the required dependencies. 
+If you just want to run the application without installing anything, use the donwnload provided above. If you are a developer and would like to edit the code, you'll need Python 3 and the required dependencies. 
 
 ```
 git clone https://github.com/probonopd/ExperimentalFMSynth/
@@ -38,8 +42,6 @@ cd ExperimentalFMSynth
 python -m venv venv
 source venv/bin/activate  # On Windows use `venv\Scripts\activate`
 ```
-
-## Usage
 
 Run the main script to start the synthesizer application:
 
