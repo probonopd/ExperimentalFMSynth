@@ -16,6 +16,10 @@ Source: [John Chowning, Computer Music, DX7 & FM Discovery](https://www.youtube.
 
 So, **multiple units containing two carriers and one modulator each**. This is how John Chowning, the discoverer of frequency modulation, uses it.
 
+## Screenshot
+
+![image](https://github.com/user-attachments/assets/9a0a343a-c293-4d79-bbb9-dbe897e391d1)
+
 ## Features
 
 - **Multiple Synth Instances**: Up to 8 synthesizers can be added, each on its own tab.
