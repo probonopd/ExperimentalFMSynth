@@ -3,7 +3,7 @@
 import sys
 import numpy as np
 import sounddevice as sd
-from PyQt6.QtWidgets import QApplication, QWidget, QVBoxLayout, QGroupBox, QPushButton, QSlider, QLabel, QHBoxLayout, QCheckBox, QLineEdit
+from PyQt6.QtWidgets import QApplication, QWidget, QVBoxLayout, QGroupBox, QPushButton, QSlider, QLabel, QHBoxLayout, QCheckBox, QLineEdit, QTabWidget
 from PyQt6.QtCore import QThread, pyqtSignal, Qt, QTimer
 
 class AudioThread(QThread):
@@ -30,9 +30,14 @@ class AudioThread(QThread):
         self.wait()
 
 class FMSynth(QWidget):
-    def __init__(self):
+    play_state_changed = pyqtSignal(bool)
+
+    def __init__(self, manager):
         super().__init__()
-        self.setWindowTitle("FM Synthesizer")
+
+        self.manager = manager  # Store reference to SynthManager
+        
+        self.setWindowTitle("Unit")
         self.setGeometry(100, 100, 400, 600)
         self.layout = QVBoxLayout()
 
@@ -166,7 +171,9 @@ class FMSynth(QWidget):
         signal = signal / np.max(np.abs(signal)) if np.max(np.abs(signal)) != 0 else np.zeros(len(t))
 
         volume = self.volume_slider.value() / 100
-        signal *= volume
+        overall_volume = self.manager.overall_volume / 100  # Access overall volume from SynthManager
+        active_synths = self.manager.active_synths  # Access number of active synths from SynthManager
+        signal *= (volume * overall_volume / max(active_synths, 1))
         
         return signal
 
@@ -175,17 +182,61 @@ class FMSynth(QWidget):
             self.audio_thread.stop_playing()
             self.play_button.setText("Play")
             self.timer.stop()
+            self.play_state_changed.emit(False)
         else:
             self.audio_thread.start_playing()
             self.play_button.setText("Stop")
             self.timer.start(100)
+            self.play_state_changed.emit(True)
 
     def closeEvent(self, event):
         self.audio_thread.stop_playing()
         event.accept()
 
+class SynthManager(QWidget):
+    def __init__(self):
+        super().__init__()
+        self.setWindowTitle("Experimental FM Synthesizer")
+        self.setGeometry(50, 50, 500, 700)
+        self.layout = QVBoxLayout()
+        self.tab_widget = QTabWidget()
+        self.layout.addWidget(self.tab_widget)
+
+        self.overall_volume = 50
+        self.active_synths = 0
+
+        self.overall_volume_slider = self.create_slider("Overall Volume (%)", self.overall_volume, self.update_overall_volume)
+        self.overall_volume_label = QLabel(f"Overall Volume: {self.overall_volume}%")
+        self.layout.addWidget(self.overall_volume_label)
+
+        self.setLayout(self.layout)
+
+        for i in range(8):
+            synth = FMSynth(self)  # Pass SynthManager instance to each FMSynth
+            synth.play_state_changed.connect(self.update_active_synths)
+            self.tab_widget.addTab(synth, f"Unit {i + 1}")
+
+    def create_slider(self, label, value, callback):
+        slider = QSlider(Qt.Orientation.Horizontal)
+        slider.setRange(0, 100)
+        slider.setValue(value)
+        slider.valueChanged.connect(callback)
+        layout = QHBoxLayout()
+        layout.addWidget(QLabel(label))
+        layout.addWidget(slider)
+        self.layout.addLayout(layout)
+        return slider
+
+    def update_overall_volume(self, value):
+        self.overall_volume = value
+        self.overall_volume_label.setText(f"Overall Volume: {value}%")
+
+    def update_active_synths(self, is_playing):
+        self.active_synths += 1 if is_playing else -1
+        self.active_synths = max(self.active_synths, 0)
+
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    synth = FMSynth()
-    synth.show()
+    manager = SynthManager()
+    manager.show()
     sys.exit(app.exec())
