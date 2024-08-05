@@ -26,7 +26,7 @@ So, **multiple units containing two carriers and one modulator each**. This is h
 - **FM Synthesis**: Create sounds using two carriers and one modulator.
 - **ADSR Envelope Control**: Adjust Attack, Decay, Sustain, and Release parameters for each operator.
 - **Volume Control**: Individual volume control for each synthesizer and an overall volume control.
-- **Real-time Sound Generation**: Easily change how the synthesizer works.
+- **Written in Python**: Easily change how the synthesizer works.
 
 ## Installation
 
@@ -34,7 +34,7 @@ To run this project, you'll need Python 3 and the required dependencies.
 
 ```
 git clone https://github.com/probonopd/ExperimentalFMSynth/
-cd your-repository
+cd ExperimentalFMSynth
 python -m venv venv
 source venv/bin/activate  # On Windows use `venv\Scripts\activate`
 ```
