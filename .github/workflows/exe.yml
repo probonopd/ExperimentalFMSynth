@@ -1,0 +1,29 @@
+name: Build and Deploy exe
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install pyinstaller
+
+      - name: Build executable with PyInstaller
+        run: |
+          pyinstaller --onefile --windowed ExperimentalFMSynth.py
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: ExperimentalFMSynth
+          path: |
+            dist/*
