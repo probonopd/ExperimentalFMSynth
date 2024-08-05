@@ -18,6 +18,40 @@ To some people, frequency modulation as implemented in the DX series of synthesi
 
 Source: [John Chowning, Computer Music, DX7 & FM Discovery](https://www.youtube.com/watch?v=Mu8lHX-xuSg), slightly abridged
 
-So, multiple "units" containing two carriers and one modulator each. This is how John Chowning, the discoverer of frequency modulation, uses it.
+So, **multiple units containing two carriers and one modulator each**. This is how John Chowning, the discoverer of frequency modulation, uses it.
 
-![image](https://github.com/user-attachments/assets/b1cefd9c-ad02-4165-a44d-6177ab7aea98)
+## Features
+
+- **Multiple Synth Instances**: Up to 8 synthesizers can be added, each on its own tab.
+- **FM Synthesis**: Create sounds using two carriers and one modulator.
+- **ADSR Envelope Control**: Adjust Attack, Decay, Sustain, and Release parameters for each operator.
+- **Volume Control**: Individual volume control for each synthesizer and an overall volume control.
+- **Real-time Sound Generation**: Easily change how the synthesizer works.
+
+## Installation
+
+To run this project, you'll need Python 3 and the required dependencies. 
+
+```
+git clone https://github.com/probonopd/ExperimentalFMSynth/
+cd your-repository
+python -m venv venv
+source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+```
+
+## Usage
+
+Run the main script to start the synthesizer application:
+
+```
+python ExperimentalFMSynth.py
+```
+
+## Acknowledgments
+
+- [John Chowning, Computer Music, DX7 & FM Discovery](https://www.youtube.com/watch?v=Mu8lHX-xuSg) for insights into FM synthesis.
+- [Anthony Marinelli Music](https://www.youtube.com/watch?v=Mu8lHX-xuSg) for the educational video.
+
+## Contributing
+
+Feel free to fork the repository, create a branch, and submit a pull request with your changes.
