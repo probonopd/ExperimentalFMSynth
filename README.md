@@ -30,7 +30,7 @@ So, **multiple units containing two carriers and one modulator each**. This is h
 
 ## Download
 
-* Windows: [ExperimentalFMSynth.exe](https://github.com/probonopd/ExperimentalFMSynth/releases/download/continuous/ExperimentalFMSynth.exe)
+Portable application that can run without needing to be installed: [Download for Windows, Mac, and Linux](https://github.com/probonopd/ExperimentalFMSynth/releases/tag/continuous)
 
 ## Installation
 
